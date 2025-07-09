@@ -1,43 +1,42 @@
-        {% extends "base.html" %}
-        {% block content %}
+{% extends "base.html" %} {% block content %}
 
-        <div>
-            <h1>Welcome {{user.username}}</h1>
-            <div>
-                <code>{{user.xp}}/1000xp</code>
-                <progress value="{{user.xp}}" max="1000"></progress>
-            </div>
-        </div>
-        <div class="missions_view">
-            {% for mission in missions %}
-            {% include "mission.html"%}
-            {% endfor %}
-        </div>
+<div>
+    <h1>Welcome {{user.username}}</h1>
+    <div>
+        <code>{{user.xp}}/1000xp</code>
+        <progress value="{{user.xp}}" max="1000"></progress>
+    </div>
+</div>
+<div class="missions_view">
+    {% for mission in missions %} {% include "mission.html"%} {% endfor %}
+</div>
+<form
+    accept=""
+    class="create_new_mission"
+    hx-target=".missions_view"
+    hx-swap="beforeend"
+    hx-post="/missions"
+    hx-trigger="submit"
+>
+    <input type="text" name="mission" placeholder="Input mission title" />
+    <input
+        type="number"
+        placeholder="XP (50-150)"
+        name="xp"
+        max="150"
+        min="50"
+    />
+    <input type="text" name="tags" placeholder="Tags" />
+    <input type="datetime-local" name="start" placeholder="Start" />
+    <input type="datetime-local" name="end" placeholder="End" />
+    <select name="habit">
+        <option>Habit</option>
+        <option>One off mission</option>
+    </select>
 
-        <form accept="" class="create_new_mission" hx-target="missions_view" hx-swap="beforeend" hx-post"/missions" >
-            <input
-                type="text"
-                name="mission"
-                placeholder="Input mission title"
-            />
-            <input
-                type="number"
-                placeholder="XP (50-150)"
-                name="xp"
-                max="150"
-                min="50"
-            />
-            <input type="text" name="tags" placeholder="Tags" />
-            <input type="date" name="start" placeholder="Start" />
-            <input type="date" name="end" placeholder="End" />
-            <select name="habit">
-                <option>Habit</option>
-                <option>One off mission</option>
-            </select>
+    <button type="submit">Set Mission</button>
+</form>
 
-            <button type="submit">Set Mission</button>
-        </form>
-
-        <div>Brain dump: whats on your mind rn.</div>
-        <div class="dumps_view"></div>
-        {% endblock %}
+<div>Brain dump: whats on your mind rn.</div>
+<div class="dumps_view"></div>
+{% endblock %}

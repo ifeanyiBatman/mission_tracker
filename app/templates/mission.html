@@ -3,6 +3,11 @@
     <p>{{ mission.description }}</p>
     <p>{{ mission.xp }} XP</p>
     <p>{{ mission.tags }}</p>
-    <p>{{ mission.start }} - {{ mission.end }}</p>
-    <p>{{ mission.habit }}</p>
+    <p>{{ mission.start_date }} - {{ mission.end_date }}</p>
+    <p>{% if mission.is_daily_habit %}
+        It's a habit, keep at it chief.
+        {% else %}
+        Let's get it done already.
+       {% endif %}
+    </p>
 </div
