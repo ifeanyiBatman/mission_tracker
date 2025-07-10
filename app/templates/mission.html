@@ -1,13 +1,32 @@
 <div class="mission">
-    <h2>{{ mission.title }}</h2>
+    <h2
+        hx-get="/missions/{{mission.id}}/edit"
+        hx-trigger="click"
+        hx-target="closest .mission"
+        hx-swap="outerHTML"
+    >
+        {{ mission.title }}
+    </h2>
     <p>{{ mission.description }}</p>
     <p>{{ mission.xp }} XP</p>
     <p>{{ mission.tags }}</p>
     <p>{{ mission.start_date }} - {{ mission.end_date }}</p>
-    <p>{% if mission.is_daily_habit %}
-        It's a habit, keep at it chief.
-        {% else %}
-        Let's get it done already.
-       {% endif %}
+    <p>
+        {% if mission.is_daily_habit %} It's a habit, keep at it chief. {% else
+        %} Let's get it done already. {% endif %}
     </p>
-</div
+    <div class="complete">
+        {% if mission.id in completed %}
+        <p>Completed ✅</p>
+        {% else %}
+        <p
+            hx-post="/missions/{{mission.id}}/complete"
+            hx-target="closest .complete"
+            hx-trigger="click"
+            hx-swap="outerHTML"
+        >
+            Mark as completed❓
+        </p>
+        {% endif %}
+    </div>
+</div>

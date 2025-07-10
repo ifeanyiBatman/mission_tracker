@@ -28,9 +28,9 @@
 ### API ROUTES
 - [x] GET  "/" - returns the index page.
 - [x] GET "/missions" - returns the content for the missions
-- POST "/missions" - create a new mission.
-- PATCH "/missions/{mission_id}" - edit a mission.
-- POST "/missions/{mission_id}/complete" - mark a mission as complete.
+- [x] POST "/missions" - create a new mission.
+- [x] PATCH "/missions/{mission_id}" - edit a mission.
+- [x] POST "/missions/{mission_id}/complete" - mark a mission as complete.
 - GET "/dumps" - renders the list of dumps.
 - POST "/dumps" - create a new dump.
 - POST "/dumps/{dump_id}/archive" - archive a dump

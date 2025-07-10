@@ -1,0 +1,58 @@
+<div class="mission_edit">
+    <form
+        hx-patch="missions/{{mission.id}}"
+        hx-swap="closest .mission"
+        hx-swap="outerHTML"
+        hx-trigger="submit"
+    >
+        <input
+            type="text"
+            name="mission"
+            placeholder="Input mission title"
+            value="{{mission.title}}"
+        />
+        <input
+            type="number"
+            placeholder="XP (50-150)"
+            name="xp"
+            max="150"
+            min="50"
+            value="{{mission.xp}}"
+        />
+        <input
+            type="text"
+            name="tags"
+            placeholder="Tags"
+            value="{{mission.tags}}"
+        />
+        <input
+            type="datetime-local"
+            name="start"
+            placeholder="Start"
+            value="{{mission.start_date}}"
+        />
+        <input
+            type="datetime-local"
+            name="end"
+            placeholder="End"
+            value="{{mission.end_date}}"
+        />
+        <select
+            name="habit"
+            value="{% if mission.is_daily_habit %} {{'Habit'}} {% else %} {{'One off mission'}} {% endif %}"
+        >
+            <option>Habit</option>
+            <option>One off mission</option>
+        </select>
+
+        <button type="submit">Save Changes</button>
+        <button
+            type="button"
+            hx-get="/missions/{{mission.id}}"
+            hx-target="closest .mission_edit"
+            hx-swap="outerHTML"
+        >
+            Cancel
+        </button>
+    </form>
+</div>
