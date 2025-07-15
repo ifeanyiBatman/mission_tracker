@@ -38,7 +38,7 @@
 </form>
 
 <div>Brain dump: whats on your mind rn.</div>
-<div
+<form
     hx-post="/dumps"
     hx-target=".dumps_view"
     hx-swap="beforebegin"
@@ -46,7 +46,7 @@
 >
     <input type="text" name="dump" />
     <button type="submit">Upload</button>
-</div>
+</form>
 <div class="dumps_view">
     {% for dump in dumps %} {% include "dump.html" %} {% endfor %}
 </div>

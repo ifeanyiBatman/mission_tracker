@@ -3,7 +3,7 @@ from fastapi.templating import Jinja2Templates
 import app.data as data
 from typing import Annotated
 import datetime
-
+from pydantic import BaseModel
 
 missions = data.MISSIONS
 dumps = data.DUMPS
@@ -11,6 +11,13 @@ current_user = data.USERS[0]
 next_mission_id = 3
 completed_missions = [1]
 next_dump_id = 10
+
+
+class DumpEntryCreate(BaseModel):
+    content: str
+    dumped: datetime.datetime
+    is_archived : bool = False
+    user_id: int = current_user['id']
 
 app = FastAPI()
 
@@ -120,7 +127,7 @@ async def complete_mission(request:Request, mission_id: int):
     return templates.TemplateResponse("complete.html",{"request":request})
 
 @app.post("/dumps")
-async def create_new_dump(request:Request,dump:str):
+async def create_new_dump(request:Request,dump:Annotated[str,Form()]):
     global next_dump_id
     new_dump = {
         "id":next_dump_id,
@@ -131,7 +138,7 @@ async def create_new_dump(request:Request,dump:str):
     }
     dumps.append(new_dump)
     next_dump_id += 1
-    return templates.TemplateResponse("mision.html",{"request":request,"dump" : new_dump })
+    return templates.TemplateResponse("dump.html",{"request":request,"dump" : new_dump })
 
 
 
