@@ -4,6 +4,7 @@ import app.data as data
 from typing import Annotated
 import datetime
 from pydantic import BaseModel
+from fastapi.staticfiles import StaticFiles # Added import
 
 missions = data.MISSIONS
 dumps = data.DUMPS
@@ -22,6 +23,8 @@ class DumpEntryCreate(BaseModel):
 app = FastAPI()
 
 templates = Jinja2Templates(directory="templates")
+
+app.mount("/static", StaticFiles(directory="static"), name="static") # Added static files mount
 
 
 @app.get("/")
@@ -63,8 +66,6 @@ async def create_mission(
     }
     missions.append(new_mission)
     next_mission_id += 1
-    print("missions submitted \n")
-    print(missions)
     return templates.TemplateResponse("mission.html", {"request": request, "mission": new_mission})
 
 @app.get("/missions/{mission_id}/edit")

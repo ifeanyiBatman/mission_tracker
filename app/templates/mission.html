@@ -1,8 +1,8 @@
-<div class="mission">
+<div class="mission-item">
     <h2
         hx-get="/missions/{{mission.id}}/edit"
         hx-trigger="click"
-        hx-target="closest .mission"
+        hx-target="closest .mission-item"
         hx-swap="outerHTML"
     >
         {{ mission.title }}
@@ -24,6 +24,7 @@
             hx-target="closest .complete"
             hx-trigger="click"
             hx-swap="outerHTML"
+            class="btn"
         >
             Mark as completed❓
         </p>

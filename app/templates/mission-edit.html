@@ -8,8 +8,9 @@
         <input
             type="text"
             name="mission"
-            placeholder="Input mission title"
+            placeholder="Mission title"
             value="{{mission.title}}"
+            class="form-input form-control
         />
         <input
             type="number"
@@ -18,39 +19,44 @@
             max="150"
             min="50"
             value="{{mission.xp}}"
+            class="form-input form-control"
         />
         <input
             type="text"
             name="tags"
-            placeholder="Tags"
+            placeholder="Tags (comma separated)"
             value="{{mission.tags}}"
+            class="form-input form-control"
         />
         <input
             type="datetime-local"
             name="start"
             placeholder="Start"
             value="{{mission.start_date}}"
+            class="form-input form-control
         />
         <input
             type="datetime-local"
             name="end"
             placeholder="End"
             value="{{mission.end_date}}"
+            class="form-input form-control"
         />
         <select
             name="habit"
-            value="{% if mission.is_daily_habit %} {{'Habit'}} {% else %} {{'One off mission'}} {% endif %}"
+            class="form-input form-control"
         >
-            <option>Habit</option>
-            <option>One off mission</option>
+            <option value="Habit" {% if mission.is_daily_habit %}selected{% endif %}>Habit</option>
+            <option value="One off mission" {% if not mission.is_daily_habit %}selected{% endif %}>One off mission</option>
         </select>
 
-        <button type="submit">Save Changes</button>
+        <button type="submit" class="btn">Save Changes</button>
         <button
             type="button"
             hx-get="/missions/{{mission.id}}"
             hx-target="closest .mission_edit"
             hx-swap="outerHTML"
+            class="btn btn-secondary"
         >
             Cancel
         </button>

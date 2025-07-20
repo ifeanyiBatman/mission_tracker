@@ -1,6 +1,9 @@
 {% extends "base.html" %} {% block content %}
 
-<div>
+<div class="container">
+    <div class="navbar">
+        <a href="/">Home</a>
+    </div>
     <h1>Welcome {{user.username}}</h1>
     <div>
         <code>{{user.xp}}/1000xp</code>
@@ -10,43 +13,62 @@
 <div class="missions_view">
     {% for mission in missions %} {% include "mission.html"%} {% endfor %}
 </div>
-<form
-    accept=""
-    class="create_new_mission"
-    hx-target=".missions_view"
-    hx-swap="beforeend"
-    hx-post="/missions"
-    hx-trigger="submit"
->
-    <input type="text" name="mission" placeholder="Input mission title" />
-    <input
-        type="number"
-        placeholder="XP (50-150)"
-        name="xp"
-        max="150"
-        min="50"
-    />
-    <input type="text" name="tags" placeholder="Tags" />
-    <input type="datetime-local" name="start" placeholder="Start" />
-    <input type="datetime-local" name="end" placeholder="End" />
-    <select name="habit">
-        <option>Habit</option>
-        <option>One off mission</option>
-    </select>
+<div class="container">
+    <h2>Create New Mission</h2>
+    <form
+        accept=""
+        class="create_new_mission"
+        hx-target=".missions_view"
+        hx-swap="beforeend"
+        hx-post="/missions"
+        hx-trigger="submit"
+    >
+        <div class="form-group">
+            <input type="text" name="mission" placeholder="Input mission title" class="form-control" />
+        </div>
+        <div class="form-group">
+            <input
+                type="number"
+                placeholder="XP (50-150)"
+                name="xp"
+                max="150"
+                min="50"
+                class="form-control"
+            />
+        </div>
+        <div class="form-group">
+            <input type="text" name="tags" placeholder="Tags" class="form-control" />
+        </div>
+        <div class="form-group">
+            <input type="datetime-local" name="start" placeholder="Start" class="form-control" />
+        </div>
+        <div class="form-group">
+            <input type="datetime-local" name="end" placeholder="End" class="form-control" />
+        </div>
+        <div class="form-group">
+            <select name="habit" class="form-control">
+                <option>Habit</option>
+                <option>One off mission</option>
+            </select>
+        </div>
+        <button type="submit" class="btn">Set Mission</button>
+    </form>
+</div>
 
-    <button type="submit">Set Mission</button>
-</form>
-
-<div>Brain dump: whats on your mind rn.</div>
-<form
-    hx-post="/dumps"
-    hx-target=".dumps_view"
-    hx-swap="beforebegin"
-    hx-trigger="submit"
->
-    <input type="text" name="dump" />
-    <button type="submit">Upload</button>
-</form>
+<div class="container">
+    <h2>Brain dump: what's on your mind rn.</h2>
+    <form
+        hx-post="/dumps"
+        hx-target=".dumps_view"
+        hx-swap="beforebegin"
+        hx-trigger="submit"
+    >
+        <div class="form-group">
+            <input type="text" name="dump" class="form-control" />
+        </div>
+        <button type="submit" class="btn">Upload</button>
+    </form>
+</div>
 <div class="dumps_view">
     {% for dump in dumps %} {% include "dump.html" %} {% endfor %}
 </div>
